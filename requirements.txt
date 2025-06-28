@@ -1,0 +1,2 @@
+Flask==1.0        # Old version with known vulnerabilities
+requests==2.19.0  # CVE-2018-18074
