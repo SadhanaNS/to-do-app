@@ -65,8 +65,7 @@ jobs:
 
       - name: Download Gitleaks (Linux x86_64)
         run: |
-         curl -sSL https://github.com/gitleaks/gitleaks/releases/latest/download/gitleaks_amd64.tar.gz -o gitleaks.tar.gz
-         tar -xzf gitleaks.tar.gz
+         curl -sSL https://github.com/gitleaks/gitleaks/releases/latest/download/gitleaks-linux-amd64 -o gitleaks
          chmod +x gitleaks
 
 
