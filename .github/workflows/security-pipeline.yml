@@ -3,8 +3,6 @@ name: DevSecOps Security Pipeline
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
 jobs:
   codeql-analysis:
