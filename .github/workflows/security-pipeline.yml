@@ -56,24 +56,24 @@ jobs:
         run: pip-audit
 
   secret-detection:
-    name: Secret Detection with Gitleaks
-    runs-on: ubuntu-latest
+      name: Secret Detection with Gitleaks
+      runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v4
 
-      - name: Download Gitleaks (Linux x86_64)
-        run: |
-         curl -sSL https://github.com/gitleaks/gitleaks/releases/latest/download/gitleaks-linux-amd64 -o gitleaks
-         chmod +x gitleaks
+        - name: Download Gitleaks Binary for Linux
+          run: |
+            curl -sSL https://github.com/gitleaks/gitleaks/releases/latest/download/gitleaks-linux-amd64 -o gitleaks
+            chmod +x gitleaks
 
+        - name: Run Gitleaks and upload SARIF
+          run: |
+            ./gitleaks detect --source=. --report-format sarif --report-path=gitleaks.sarif
 
-      - name: Run Gitleaks and upload SARIF
-        run: |
-         ./gitleaks detect --source=. --report-format sarif --report-path=gitleaks.sarif
+        - name: Upload Gitleaks SARIF to GitHub Security tab
+          uses: github/codeql-action/upload-sarif@v3
+          with:
+            sarif_file: gitleaks.sarif
 
-      - name: Upload Gitleaks SARIF to GitHub Security tab
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: gitleaks.sarif
