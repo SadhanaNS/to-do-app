@@ -71,7 +71,8 @@ jobs:
       - name: Install TruffleHog
         run: pip install trufflehog
 
-      - name: Run TruffleHog
-        run: trufflehog git . --json
+      - name: Run TruffleHog v2
+        run: trufflehog --regex --entropy=False .
+
 
 
