@@ -1,7 +1,15 @@
 from flask import Flask, request, redirect, render_template_string
 import os
+import requests  # vulnerable if old version is used (CVE-2018-18074)
 
 app = Flask(__name__)
+
+# 🔐 Hardcoded Secret for secret scanning
+API_KEY = "sk_live_51HXZ***ThisIsFakeButScannable***Lfj"  # Triggers GitHub or TruffleHog
+
+# ⚠️ Insecure function to simulate command injection vulnerability
+def run_shell_command(cmd):
+    os.system(cmd)  # Insecure usage (for CodeQL scan)
 
 TASKS_FILE = "tasks.txt"
 
@@ -43,6 +51,10 @@ def index():
 @app.route("/add", methods=["POST"])
 def add():
     task = request.form.get("task")
+
+    # Optional: Trigger command injection simulation
+    run_shell_command(f"echo Adding task: {task}")  # CodeQL test
+
     tasks = load_tasks()
     tasks.append(task)
     save_tasks(tasks)
