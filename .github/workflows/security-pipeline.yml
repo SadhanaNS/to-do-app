@@ -72,11 +72,9 @@ jobs:
       with:
         fetch-depth: 0
 
-    - name: Install TruffleHog
-      run: pip install trufflehog
-
-    - name: Run TruffleHog full scan and output SARIF
-      run: trufflehog filesystem --scan-all-branches --report-format sarif . > trufflehog.sarif
+    - name: Run TruffleHog and output SARIF
+      run: |
+        npx trufflehog git --repo-path . --branch main --format sarif > trufflehog.sarif
 
     - name: Upload SARIF to GitHub Security tab
       uses: github/codeql-action/upload-sarif@v3
