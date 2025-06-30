@@ -65,8 +65,8 @@ jobs:
               
         - name: Download TruffleHog v3 Binary
           run: |
-               curl -L -o trufflehog https://github.com/trufflesecurity/trufflehog/releases/latest/download/trufflehog_amd64
-               chmod +x trufflehog
+                curl -L -o trufflehog https://github.com/trufflesecurity/trufflehog/releases/download/v3.64.3/trufflehog_linux_amd64
+                chmod +x trufflehog
               
         - name: Run TruffleHog v3 and generate SARIF
           run: |
