@@ -71,14 +71,11 @@ jobs:
         with:
           fetch-depth: 0  # Full git history for deep scanning
 
-      - name: Run TruffleHog OSS
-        id: trufflehog
+      - name: Run TruffleHog full history scan
         uses: trufflesecurity/trufflehog@main
         with:
-          path: ./              # Local repo path
-          base: main            # Base branch for comparison
-          head: HEAD            # Head commit range
-          extra_args: --report-format sarif
+          path: .
+          scanArguments: --scan-all-branches --report-format sarif
   
       - name: Upload SARIF to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v3
