@@ -56,23 +56,32 @@ jobs:
         run: pip-audit
 
   secret-detection:
-     name: Secret Detection with TruffleHog v3
-     runs-on: ubuntu-latest
+  
+    name: Secret Detection with TruffleHog OSS
+    runs-on: ubuntu-latest
 
-     steps:
-        - name: Checkout code
-          uses: actions/checkout@v4
-              
-        - name: Download TruffleHog v3 Binary
-          run: |
-                curl -L -o trufflehog https://github.com/trufflesecurity/trufflehog/releases/download/v3.64.3/trufflehog_linux_amd64
-                chmod +x trufflehog
-              
-        - name: Run TruffleHog v3 and generate SARIF
-          run: |
-              ./trufflehog git file://$(pwd) --report-format sarif > trufflehog.sarif
-              
-        - name: Upload SARIF to GitHub Security tab
-          uses: github/codeql-action/upload-sarif@v3
-          with:
-              sarif_file: trufflehog.sarif
+    permissions:
+      contents: read
+      pull-requests: write
+      issues: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full git history for deep scanning
+
+      - name: Run TruffleHog OSS
+        id: trufflehog
+        uses: trufflesecurity/trufflehog@v3.64.3
+        with:
+          path: ./               # scan the current repo
+          base: main             # base branch
+          head: HEAD             # head reference
+          extra_args: --report-format sarif
+
+      - name: Upload SARIF to GitHub
+        if: steps.trufflehog.outcome == 'success' || steps.trufflehog.outcome == 'failure'
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: trufflehog.sarif
