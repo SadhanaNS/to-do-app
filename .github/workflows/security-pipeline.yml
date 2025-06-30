@@ -77,7 +77,7 @@ jobs:
         uses: trufflesecurity/trufflehog@main
         with:
           path: .
-          scanArguments: --scan-all-branches --report-format sarif
+          scanArguments: --scan-all-branches --report-format sarif . > trufflehog.sarif
           output: trufflehog.sarif
   
       - name: Upload SARIF to GitHub Security tab
