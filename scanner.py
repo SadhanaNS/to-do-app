@@ -5,7 +5,13 @@ import requests  # vulnerable if old version is used (CVE-2018-18074)
 app = Flask(__name__)
 
 # 🔐 Hardcoded Secret for secret scanning
-API_KEY = "sk_live_51HXZrHAp0qhKZq9Ld2FB9HzRj3kIqI4fzRZjYbUBxDeqbLfj3kIqI" # Triggers GitHub or TruffleHog
+API_KEY = "sk_live_51HXZrHAp0qhKZq9Ld2FB9HzRj3kIqI4fzRZjYbUBxDeqbLfj3kIqI" 
+Connection Strings= "Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password=myPassword"
+API Keys= AKIAIOSFODNN7EXAMPLE
+Private Keys =  "-----BEGIN PRIVATE KEY-----"
+Connection Strings= "Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password=myPassword"
+HTTP Authentication Headers =  "Authorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ="
+Passwords =  "password123"
 
 # ⚠️ Insecure function to simulate command injection vulnerability
 def run_shell_command(cmd):
