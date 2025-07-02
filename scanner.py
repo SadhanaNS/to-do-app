@@ -6,11 +6,11 @@ app = Flask(__name__)
 
 # 🔐 Hardcoded Secret for secret scanning
 API_KEY = "sk_live_51HXZrHAp0qhKZq9Ld2FB9HzRj3kIqI4fzRZjYbUBxDeqbLfj3kIqI" 
-Connection Strings = "Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password=myPassword"
-API Keys = AKIAIOSFODNN7EXAMPLE
-Private Keys =  "-----BEGIN PRIVATE KEY-----"
-Connection Strings = "Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password=myPassword"
-HTTP Authentication Headers =  "Authorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ="
+Connection_Strings = "Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password=myPassword"
+API_Keys = AKIAIOSFODNN7EXAMPLE
+Private_Keys =  "-----BEGIN PRIVATE KEY-----"
+Connection_Strings = "Server=myServerAddress;Database=myDataBase;User Id=myUsername;Password=myPassword"
+HTTP_Authentication_Headers =  "Authorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ="
 Passwords =  "password123"
 
 # ⚠️ Insecure function to simulate command injection vulnerability
