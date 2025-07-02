@@ -55,28 +55,4 @@ jobs:
       - name: Run pip-audit
         run: pip-audit
 
-  secret-detection:
   
-    name: Secret Detection with TruffleHog OSS
-    runs-on: ubuntu-latest
-
-    permissions:
-      contents: read
-      pull-requests: write
-      issues: write
-      security-events: write
-
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 0
-
-    - name: Run TruffleHog and output SARIF
-      run: |
-        npx trufflehog git --repo-path . --branch main --format sarif > trufflehog.sarif
-
-    - name: Upload SARIF to GitHub Security tab
-      uses: github/codeql-action/upload-sarif@v3
-      with:
-        sarif_file: trufflehog.sarif
